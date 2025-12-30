@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>股利一覽</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 標題區 -->
+        <header class="header">
+            <h1>股利一覽</h1>
+            <p class="subtitle">顯示除權息合計殖利率 ≥ 5% 的股票</p>
+            <p class="update-date">資料更新日期: <span id="updateDate">載入中...</span></p>
+        </header>
+
+        <!-- 類股選單 -->
+        <div class="category-section">
+            <h2>類股選單</h2>
+            <div id="categoryTable" class="category-grid">
+                <!-- 由 JavaScript 動態產生 -->
+            </div>
+        </div>
+
+        <!-- 股票結果 -->
+        <div class="stock-section">
+            <h2>股票清單 - <span id="currentCategory">請選擇類股</span></h2>
+            <div class="stock-count">共 <span id="stockCount">0</span> 檔股票</div>
+            
+            <div class="table-container">
+                <table id="stockTable" class="stock-table">
+                    <thead>
+                        <tr>
+                            <th data-sort="code">代號</th>
+                            <th data-sort="name">名稱</th>
+                            <th data-sort="price">成交</th>
+                            <th data-sort="frequency">股利發放頻率</th>
+                            <th data-sort="cashDividend">現金股利</th>
+                            <th data-sort="stockDividend">股票股利</th>
+                            <th data-sort="totalDividend">合計股利</th>
+                            <th data-sort="totalYield" class="highlight">除權息合計殖利率</th>
+                            <th data-sort="exDividendDate">除息交易日</th>
+                            <th data-sort="paymentDate">現金股利發放日</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stockTableBody">
+                        <tr>
+                            <td colspan="10" class="no-data">請選擇上方類股進行查看</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+

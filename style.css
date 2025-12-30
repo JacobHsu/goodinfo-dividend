@@ -1,0 +1,213 @@
+/* ===== GoodInfo Style Reset & Variables ===== */
+:root {
+    --gi-bg-gradient: linear-gradient(to bottom, #C0D9FF 0%, #FFFFFF 100%);
+    --gi-blue-header: #D1E0FF;
+    --gi-blue-th: #E6F0FF;
+    --gi-sidebar-bg: #F0F0F0;
+    --gi-border: #CCCCCC;
+    --gi-border-dark: #888888;
+    --gi-text: #000000;
+    --gi-link: #0000E6;
+    --gi-up: #FF0000;
+    --gi-down: #008000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border-radius: 0 !important; /* 嚴格禁用圓角 */
+}
+
+body {
+    font-family: "Times New Roman", "微軟正黑體", "新細明體", sans-serif;
+    background: var(--gi-bg-gradient);
+    background-attachment: fixed;
+    color: var(--gi-text);
+    min-height: 100vh;
+    padding: 10px;
+}
+
+/* ===== Container ===== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #FFFFFF;
+    border: 1px solid var(--gi-border-dark);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+/* ===== Header (Banner Style) ===== */
+.header {
+    background: var(--gi-blue-header);
+    padding: 15px;
+    border-bottom: 2px solid var(--gi-border-dark);
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 24px;
+    color: #444;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #666;
+}
+
+.update-date {
+    font-size: 12px;
+    color: #888;
+    margin-top: 5px;
+}
+
+/* ===== Category Section ===== */
+.category-section {
+    padding: 10px;
+    background: var(--gi-sidebar-bg);
+    border-bottom: 1px solid var(--gi-border);
+}
+
+.category-section h2 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #003366;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 2px;
+}
+
+.category-btn {
+    background: #FFFFFF;
+    border: 1px solid #999;
+    padding: 4px 6px;
+    font-size: 12px;
+    cursor: pointer;
+    color: var(--gi-link);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.category-btn:hover {
+    background: #E6F0FF;
+    text-decoration: underline;
+}
+
+.category-btn.active {
+    background: var(--gi-blue-header);
+    border: 1px solid #000;
+    font-weight: bold;
+    color: #000;
+}
+
+.stock-count-badge {
+    font-size: 11px;
+    color: #666;
+    margin-left: 3px;
+}
+
+/* ===== Stock Section ===== */
+.stock-section {
+    padding: 15px;
+}
+
+.stock-section h2 {
+    font-size: 18px;
+    padding: 5px 10px;
+    background: var(--gi-blue-th);
+    border-left: 5px solid #003366;
+    margin-bottom: 10px;
+}
+
+.stock-count {
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+/* ===== Table Style ===== */
+.table-container {
+    overflow-x: auto;
+}
+
+.stock-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--gi-border-dark);
+    font-size: 14px;
+}
+
+.stock-table th {
+    background-color: var(--gi-blue-th);
+    border: 1px solid var(--gi-border-dark);
+    padding: 6px;
+    text-align: center;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+}
+
+.stock-table th:hover {
+    background-color: var(--gi-blue-header);
+}
+
+.stock-table th.highlight {
+    background-color: #B0CFFF;
+}
+
+.stock-table td {
+    border: 1px solid var(--gi-border);
+    padding: 5px;
+    text-align: center;
+}
+
+.stock-table tr:nth-child(even) {
+    background-color: #F9F9F9;
+}
+
+.stock-table tr:hover {
+    background-color: #FFFFE1; /* GoodInfo hover color */
+}
+
+/* ===== Specific Column Styles ===== */
+.yield-high {
+    color: var(--gi-up);
+    font-weight: bold;
+}
+
+.yield-medium {
+    color: #000000;
+}
+
+.price-up {
+    color: var(--gi-up);
+}
+
+.price-down {
+    color: var(--gi-down);
+}
+
+/* ===== Links ===== */
+.stock-link {
+    color: var(--gi-link);
+    text-decoration: none;
+}
+
+.stock-link:hover {
+    text-decoration: underline;
+}
+
+/* ===== Utilities ===== */
+.no-data {
+    padding: 40px;
+    color: #999;
+    font-style: italic;
+}
+
+.loading {
+    padding: 20px;
+}
+
