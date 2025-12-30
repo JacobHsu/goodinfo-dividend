@@ -5,14 +5,14 @@
 
 // 類股清單
 const INDUSTRIES = [
-    '水泥工業', '食品工業', '塑膠工業', '紡織纖維', '電機機械',
+    'ETF', '水泥工業', '食品工業', '塑膠工業', '紡織纖維', '電機機械',
     '電器電纜', '生技醫療業', '化學工業', '玻璃陶瓷', '造紙工業',
     '鋼鐵工業', '橡膠工業', '汽車工業', '電腦及週邊設備業', '半導體業',
     '電子零組件業', '其他電子業', '通信網路業', '資訊服務業', '建材營造業',
     '航運業', '觀光餐旅', '銀行業', '保險業', '金控業',
     '貿易百貨業', '光電業', '電子通路業', '證券業', '綠能環保',
     '數位雲端', '其他業', '運動休閒', '油電燃氣業', '居家生活',
-    '文化創意業', '農業科技業', 'ETF'
+    '文化創意業', '農業科技業'
 ];
 
 // 全域狀態
@@ -50,22 +50,22 @@ function renderCategoryButtons() {
     });
 }
 
-// 載入所有 CSV 資料
+// 載入所有 CSV 資料（並行加載以提升速度）
 async function loadAllData() {
-    for (const industry of INDUSTRIES) {
+    await Promise.all(INDUSTRIES.map(async (industry) => {
         try {
             const response = await fetch(`data/${encodeURIComponent(industry)}.csv`);
             const text = await response.text();
             const data = parseCSV(text);
             let filtered = filterHighYield(data);
-            
+
             // 如果是 ETF，過濾掉代碼以 'B' 結尾的債券型 ETF
             if (industry === 'ETF') {
                 filtered = filtered.filter(stock => !stock.code.endsWith('B'));
             }
-            
+
             allData[industry] = filtered;
-            
+
             // 更新按鈕上的數量
             const btn = document.querySelector(`[data-industry="${industry}"]`);
             if (btn) {
@@ -75,7 +75,7 @@ async function loadAllData() {
             console.error(`載入 ${industry} 失敗:`, err);
             allData[industry] = [];
         }
-    }
+    }));
 }
 
 // 解析 CSV
