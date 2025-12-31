@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python export_high_yield.py:*)",
+      "Bash(findstr:*)",
+      "Bash(python compare_stocks.py:*)"
+    ]
+  }
+}

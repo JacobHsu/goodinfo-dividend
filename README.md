@@ -36,7 +36,20 @@ python scraper.py
 
 執行後會在 `data/` 目錄下產生各類股的 `.csv` 檔案（例如：`水泥工業.csv`）。
 
-### 3. 本地啟動網頁
+### 3. 匯出完整清單（可選）
+
+若要將所有產業中殖利率 ≥ 5% 的股票匯出成單一 CSV 檔案：
+
+```bash
+python export_high_yield.py
+```
+
+執行後會在 `data/` 目錄產生 `high_yield_stocks.csv`，包含：
+- 所有產業的高殖利率股票（已排序）
+- 自動過濾黑名單股票（去年沒發股利的股票）
+- 自動過濾 ETF 中的債券型（代碼結尾為 'B'）
+
+### 4. 本地啟動網頁
 
 建議使用簡易伺服器開啟以避免瀏覽器 CORS 限制：
 
@@ -48,15 +61,17 @@ python -m http.server 8080
 ## 📁 專案結構
 
 ```
-d:/15-stock/goodinfo/
-├── index.html          # 主頁面結構
-├── style.css           # GoodInfo 視覺規範樣式
-├── app.js              # CSV 載入與互動邏輯
-├── scraper.py          # Selenium 爬蟲腳本
-├── .cursorrules        # 專案風格指導規範 (供 AI 遵循)
+d:/15-stock/goodinfo-dividend/
+├── index.html              # 主頁面結構
+├── style.css               # GoodInfo 視覺規範樣式
+├── app.js                  # CSV 載入與互動邏輯
+├── scraper.py              # Selenium 爬蟲腳本
+├── export_high_yield.py    # 匯出完整清單腳本
+├── .cursorrules            # 專案風格指導規範 (供 AI 遵循)
 ├── data/
-│   └── *.csv           # 爬取的類股資料檔案
-└── README.md           # 本文件
+│   ├── *.csv                     # 爬取的類股資料檔案
+│   └── high_yield_stocks.csv     # 匯出的完整清單（執行後產生）
+└── README.md               # 本文件
 ```
 
 ## 🔧 技術架構
@@ -107,6 +122,7 @@ MIN_YIELD = 5.0
 1. **資料更新頻率**: 建議定期執行爬蟲以獲取最新股利資訊。
 2. **爬蟲禮儀**: 請勿過度頻繁執行爬蟲,避免對 GoodInfo 伺服器造成負擔
 3. **資料準確性**: 資料來源為 GoodInfo,僅供參考,投資前請自行查證
+4. **黑名單管理**: 若發現股票去年沒發股利，可編輯 `app.js` 和 `export_high_yield.py` 中的 `DIVIDEND_BLACKLIST` 加入代碼
 
 ## 🎯 使用範例
 
