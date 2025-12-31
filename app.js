@@ -15,6 +15,13 @@ const INDUSTRIES = [
     '文化創意業', '農業科技業'
 ];
 
+// 黑名單: 去年沒發股利的股票代碼
+// 查詢方式: https://goodinfo.tw/tw/StockDividendPolicy.asp?STOCK_ID=代碼
+const DIVIDEND_BLACKLIST = [
+    '1806',  // 冠軍 - 2024 年沒發股利
+    // 繼續添加其他股票代碼...
+];
+
 // 全域狀態
 let allData = {};
 let currentIndustry = null;
@@ -63,6 +70,9 @@ async function loadAllData() {
             if (industry === 'ETF') {
                 filtered = filtered.filter(stock => !stock.code.endsWith('B'));
             }
+
+            // 過濾掉黑名單中的股票 (去年沒發股利)
+            filtered = filtered.filter(stock => !DIVIDEND_BLACKLIST.includes(stock.code));
 
             allData[industry] = filtered;
 
